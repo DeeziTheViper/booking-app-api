@@ -17,7 +17,7 @@ export const getHotel = async (req, res, next) => {
 
 }
 
-export const createHotel =  async (req, res) => {
+export const createHotel =  async (req, res,next) => {
     const newHotel = new Hotel(req.body)
     const savedHotel = await newHotel.save().
     catch(err => {
@@ -53,4 +53,15 @@ export const deleteHotel = async (req, res) => {
 export const getHotelCount = async(req,res)=>{
     hotelCount = await Hotel.count()
     
+}
+
+export const countByCity = async(req,res,next) => {
+    
+    let cities = req.body.cities
+    const list = await Promise.all(cities.map(city => {
+        return Hotel.countDocuments({city:city})
+    })).catch(err => {
+        next(err)
+    })
+    res.status(200).json(list)
 }
