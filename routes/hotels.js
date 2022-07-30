@@ -20,7 +20,7 @@ router.put('/:id',verifyAdmin, updateHotel)
 //Delete
 router.delete('/:id',verifyAdmin, deleteHotel)
 
-router.get('/count', getHotelCount)
+
 
 
 //another way of handling async calls
