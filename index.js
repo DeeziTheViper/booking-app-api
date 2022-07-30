@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
-import lodgeRouter from './routes/lodges.js';
+import hotelRouter from './routes/hotels.js';
 import cookieParser from "cookie-parser";
 import userRouter from './routes/users.js'
 import roomRouter from './routes/rooms.js';
@@ -15,7 +15,6 @@ app.use(cookieParser())
 const connect = async () => {
     const connection = await mongoose.connect(process.env.MONGODB).
     catch(error => {
-        console.log(error,"omo")
     });
     console.log(`DB connected on this ${connection.connection.host}`)
 }
@@ -33,7 +32,7 @@ mongoose.connection.on('disconnected', () => {
 
 app.use(express.json())
 app.use('/api/auth', authRouter);
-app.use('/api/lodges', lodgeRouter);
+app.use('/api/hotels', hotelRouter);
 app.use('/api/users', userRouter);
 app.use('/api/rooms', roomRouter);
 
