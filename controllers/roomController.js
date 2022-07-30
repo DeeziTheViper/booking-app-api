@@ -1,11 +1,11 @@
 import Room from "../models/Room.js";
-import Lodge from "../models/Lodge.js";
+import Hotel from "../models/Hotel.js";
 
 export const createRoom = async (req, res, next) => {
-    const lodge = req.params.lodgeId
+    const hotel = req.params.hotelId
     const newRoom = await new Room(req.body).save()
     .catch(err => next(err))
-     await Lodge.findByIdAndUpdate(lodge,{
+     await Hotel.findByIdAndUpdate(hotel,{
         $push:{rooms:newRoom._id}
      })
     .catch(err => {
@@ -29,7 +29,7 @@ export const deleteRoom = async (req, res, next) => {
     console.log(req.body.roomId)
     await Room.findByIdAndDelete(req.body.roomId)
     .catch(err => next(err))
-    await Lodge.findByIdAndUpdate(req.params.lodgeId, {
+    await Hotel.findByIdAndUpdate(req.params.HotelId, {
         $pull: {
             rooms:req.params.id
         },
