@@ -6,11 +6,20 @@ import hotelRouter from './routes/hotels.js';
 import cookieParser from "cookie-parser";
 import userRouter from './routes/users.js'
 import roomRouter from './routes/rooms.js';
+import cors from "cors";
+
+
 
 dotenv.config()
 
 const app = express()
 app.use(cookieParser())
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors({
+        origin: process.env.CLIENT_URL
+    }))
+}
+
 
 const connect = async () => {
     const connection = await mongoose.connect(process.env.MONGODB).

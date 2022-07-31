@@ -50,14 +50,12 @@ export const deleteHotel = async (req, res) => {
 }
 
 
-export const getHotelCount = async(req,res)=>{
-    hotelCount = await Hotel.count()
-    
-}
+
 
 export const countByCity = async(req,res,next) => {
     
     let cities = req.body.cities
+    console.log(req.body)
     const list = await Promise.all(cities.map(city => {
         return Hotel.countDocuments({city:city})
     })).catch(err => {

@@ -20,7 +20,7 @@ router.put('/:id',verifyAdmin, updateHotel)
 //Delete
 router.delete('/:id',verifyAdmin, deleteHotel)
 
-router.get('/countByCity', countByCity)
+router.post('/countByCity', countByCity)
 router.get('/countByType', getHotels)
 
 
