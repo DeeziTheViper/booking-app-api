@@ -21,7 +21,7 @@ router.put('/:id',verifyAdmin, updateHotel)
 router.delete('/:id',verifyAdmin, deleteHotel)
 
 router.post('/countByCity', countByCity)
-router.get('/countByType', countByType)
+router.post('/countByType', countByType)
 
 
 //another way of handling async calls
