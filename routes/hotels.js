@@ -10,11 +10,11 @@ const router = express.Router()
 
 
 //get all
-router.get('/', getHotels)
+router.post('/', getHotels)
 //get
 router.get('/find/:id', getHotel)
 //create
-router.post("/",verifyAdmin, createHotel)
+router.post("/create",verifyAdmin, createHotel)
 //update
 router.put('/:id',verifyAdmin, updateHotel)
 //Delete

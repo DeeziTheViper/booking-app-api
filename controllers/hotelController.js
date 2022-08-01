@@ -1,12 +1,6 @@
 import Hotel from "../models/Hotel.js"
 
-export const getHotels = async (req, res, next) => {
-    const hotels = await Hotel.find().catch(err => {
-        next(err);
-    })
 
-    res.status(200).json(hotels)
-}
 
 export const getHotel = async (req, res, next) => {
     const hotel = await Hotel.findById(req.params.id).catch(err => {
@@ -51,17 +45,25 @@ export const deleteHotel = async (req, res) => {
 
 
 
+export const getHotels = async (req, res, next) => {
+    const {max,min,...others} = req.body
+    const hotels = await Hotel.find({...others, cheapestPrice:{$gt:min | 1, $lt:max || 7000}} )
+    .limit(req.body.limit)
+    .catch(err => next(err))
+    res.status(200).json(hotels);
+}
+
+
 
 export const countByCity = async(req,res,next) => {
     
     let cities = req.body.cities
-    console.log(req.body)
     const list = await Promise.all(cities.map(city => {
         return Hotel.countDocuments({city:city})
     })).catch(err => {
         next(err)
     })
-    res.status(200).json(list)
+    res.status(200).json(list);
 }
 
 export const countByType = async (req,res,next) => {
@@ -78,7 +80,7 @@ export const countByType = async (req,res,next) => {
         {type: "villas", count:villaCount},
         {type: "cabins", count: cabinCount},
 
-    ])
+    ]);
    
 
 
