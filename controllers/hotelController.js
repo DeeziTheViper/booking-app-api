@@ -1,6 +1,13 @@
 import Hotel from "../models/Hotel.js"
 
 
+export const getAllHotel = async (req, res, next) => {
+    const hotels = await Hotel.find().catch(err => {
+        next(err)
+    })
+
+    res.status(200).json(hotels)
+}
 
 export const getHotel = async (req, res, next) => {
     const hotel = await Hotel.findById(req.params.id).catch(err => {

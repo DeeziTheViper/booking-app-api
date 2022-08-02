@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
-import {updateHotel,createHotel,deleteHotel, getHotels, countByCity, countByType } from "../controllers/hotelController.js";
+import {updateHotel,createHotel,deleteHotel, getHotels, countByCity, countByType, getAllHotel } from "../controllers/hotelController.js";
 import { getHotel } from "../controllers/hotelController.js";
 
 
@@ -10,6 +10,8 @@ const router = express.Router()
 
 
 //get all
+router.get('/', getAllHotel)
+
 router.post('/', getHotels)
 //get
 router.get('/find/:id', getHotel)
