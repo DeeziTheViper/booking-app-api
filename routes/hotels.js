@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
-import {updateHotel,createHotel,deleteHotel, getHotels, countByCity, countByType, getAllHotel } from "../controllers/hotelController.js";
+import {updateHotel,createHotel,deleteHotel, getHotels, countByCity, countByType, getAllHotel, getHotelRooms } from "../controllers/hotelController.js";
 import { getHotel } from "../controllers/hotelController.js";
 
 
@@ -25,6 +25,7 @@ router.delete('/:id',verifyAdmin, deleteHotel)
 router.post('/countByCity', countByCity)
 router.post('/countByType', countByType)
 
+router.get('/room/:id', getHotelRooms)
 
 //another way of handling async calls
 /*

@@ -13,9 +13,9 @@ router.get('/:id', getRoom)
 //update
 router.put('/:id',verifyAdmin, updateRoom)
 //create
-router.post('/:lodgeId', verifyAdmin,createRoom)
+router.post('/:roomId', verifyAdmin,createRoom)
 //Delete
-router.delete('/:lodgeId',verifyAdmin, deleteRoom)
+router.delete('/:roomId',verifyAdmin, deleteRoom)
 
 
 
