@@ -28,13 +28,13 @@ export const loginController = async (req, res, next) => {
     let user = null;
     //accept either username or email for login 
     try {
-        let reqUser = req.body.username.toLowerCase()
-        //let str = reqUser.charAt(0).toUpperCase()
-        //let str2 = reqUser.slice(1)
+        let reqUser = req.body.username
+        let str = reqUser.charAt(0).toUpperCase()
+        let str2 = reqUser.slice(1)
 
         let reqEmail=req.body.username.toLowerCase()
         
-        user = await User.findOne({username: reqUser})
+        user = await User.findOne({username: str+str2})
         if(!user) {
             try{
                user =  await User.findOne({email:reqEmail})
