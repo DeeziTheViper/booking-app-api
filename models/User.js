@@ -14,6 +14,21 @@ const userSchema = new Schema({
     required: true,
     unique:true
 },
+profilepic:{
+    type:String,
+},
+country:{
+    type:String,
+    required:true
+},
+city:{
+    type:String,
+    required:true
+},
+phone:{
+    type:String,
+    required:true
+},
 password:{
     type:String,
     trim:true,
