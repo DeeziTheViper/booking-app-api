@@ -52,7 +52,7 @@ export const loginController = async (req, res, next) => {
         const passwordCorrect =  bcrypt.compareSync(`${req.body.password}`, user.password)
         if(!passwordCorrect) return(next(createErr(400,"Wrong user Credentials")))
         const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.SECRET_KEY)
-        const {password, isAdmin, ...otherDetails } = user._doc
+        const {password, ...otherDetails } = user._doc
         res.cookie("access_token", token, {
             httpOnly: true,
         }).status(200).json(otherDetails)
