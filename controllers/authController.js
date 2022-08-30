@@ -12,6 +12,7 @@ export const registerController = async (req, res, next) => {
     let str = reqUser.charAt(0).toUpperCase()
     let str2 = reqUser.slice(1)
     const newUser = new User({
+        ...req.body,
         username: str+str2,
         email: req.body.email.toLowerCase(),
         password: hash
