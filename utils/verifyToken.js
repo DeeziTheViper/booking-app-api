@@ -26,6 +26,7 @@ export const verifyUser = (req, res, next) => {
 
 export const verifyAdmin = (req, res, next) => {
     verifyToken(req, res,() => {
+        
         if(req.user === undefined) return next(createErr(401, "You're not Aunthenticated"))
         if(req.user.isAdmin) return next()
         else return next(createErr(403, "You're not an administrator"))
