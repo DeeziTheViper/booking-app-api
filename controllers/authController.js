@@ -17,10 +17,11 @@ export const registerController = async (req, res, next) => {
         email: req.body.email.toLowerCase(),
         password: hash
     })
-    await newUser.save().catch(
+    await newUser.save()
+    .catch(
         err => next(err)
-    )
-
+    ) 
+    
     res.status(200).send("User has been created")
 }
 
@@ -49,7 +50,6 @@ export const loginController = async (req, res, next) => {
     }
     if (!user) return next(createErr(404, "This account does not exist"))
    
-    
         const passwordCorrect =  bcrypt.compareSync(`${req.body.password}`, user.password)
         if(!passwordCorrect) return(next(createErr(400,"Wrong user Credentials")))
         const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.SECRET_KEY)
