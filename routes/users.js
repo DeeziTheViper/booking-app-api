@@ -12,7 +12,7 @@ const router = express.Router()
 //get all
 router.get('/',verifyAdmin, getUsers)
 //get
-router.get('/:id',verifyUser, getUser)
+router.get('/:username',verifyUser, getUser)
 //update
 router.put('/:id',verifyUser, updateUser)
 //Delete
