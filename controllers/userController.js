@@ -10,7 +10,7 @@ export const getUsers = async (req, res, next) => {
 }
 
 export const getUser = async (req, res, next) => {
-    const user = await User.findById(req.params.id).catch(err => {
+    const user = await User.find({"username":req.params.username}).catch(err => {
         next(err)
     })
 
