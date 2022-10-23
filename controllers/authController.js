@@ -27,28 +27,19 @@ export const registerController = async (req, res, next) => {
 
 
 export const loginController = async (req, res, next) => {
+    try {
     let user = null;
     //accept either username or email for login 
-    try {
+    
         let reqUser = req.body.username
         let str = reqUser.charAt(0).toUpperCase()
         let str2 = reqUser.slice(1)
-
-        let reqEmail=req.body.username.toLowerCase()
+        const nUsername = str + str2
+        const nEmail =req.body.username.toLowerCase()
         
-        user = await User.findOne({username: str+str2})
-        if(!user) {
-            try{
-               user =  await User.findOne({email:reqEmail})
-        }catch (err){
-            next(err)
-        }
-    }
-    }
-    catch (err){
-        next(err);
-    }
-    if (!user) return next(createErr(404, "This account does not exist"))
+        user = await User.findOne({username: nUsername})
+        if(!user) user =  await User.findOne({email:nEmail})
+        if (!user) return next(createErr(404, "This account does not exist"))
    
         const passwordCorrect =  bcrypt.compareSync(`${req.body.password}`, user.password)
         if(!passwordCorrect) return(next(createErr(400,"Wrong user Credentials")))
@@ -56,10 +47,9 @@ export const loginController = async (req, res, next) => {
         const {password, ...otherDetails } = user._doc
         res.cookie("access_token", token, {
             httpOnly: true,
-        }).status(200).json({...otherDetails})
-
-   
-    
-   
+        }).status(200).json({...otherDetails})  
+    }catch(err) {
+         next(err)
+    }
 }
 
